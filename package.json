@@ -1,0 +1,42 @@
+{
+  "name": "node-jobs-react",
+  "version": "0.1.0",
+  "private": false,
+  "proxy": "http://localhost:8080",
+  "dependencies": {
+    "graphql-subscriptions": "^0.4.4",
+    "jest": "^21.2.1",
+    "material-design-icons": "^3.0.1",
+    "minimist": "^1.2.0",
+    "prop-types": "^15.5.10",
+    "react": "^16.2.0",
+    "react-apollo": "^1.4.2",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.5",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.2",
+    "react-router-redux": "^4.0.8",
+    "redux-form": "^7.0.3",
+    "reselect": "^3.0.1",
+    "subscriptions-transport-ws": "^0.8.1",
+    "tachyons": "^4.9.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.1.1",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-async-await": "^0.0.0",
+    "eslint-plugin-flowtype": "^2.40.1",
+    "flow-bin": "^0.51.0",
+    "react-scripts": "^1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "flow": "flow",
+    "lint-check": "eslint src",
+    "analyze": "source-map-explorer build/static/js/main.*"
+  }
+}
