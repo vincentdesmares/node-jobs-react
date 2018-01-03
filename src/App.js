@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import { Route } from "react-router-dom";
-import ProjectsPage from "./components/page/projects";
+import DashboardPage from "./components/page/dashboard";
 import ProjectPage from "./components/page/project";
 import NewProjectPage from "./components/page/projectCreate";
 import ZoningsPage from "./components/page/zonings";
@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Route exact path="/" component={ProjectsPage} />
+        <Route exact path="/" component={DashboardPage} />
         <Route exact path="/project/new" component={NewProjectPage} />
         <Route
           exact

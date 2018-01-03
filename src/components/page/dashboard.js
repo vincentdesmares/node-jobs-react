@@ -1,9 +1,9 @@
 //@flow
 import React, { Component } from "react";
-import ProjectList from "../project/list";
+import PipelineList from "../pipeline/list";
 import { Link } from "react-router-dom";
 
-class ProjectsPage extends Component {
+class DashboardPage extends Component {
   render() {
     return (
       <div>
@@ -16,10 +16,10 @@ class ProjectsPage extends Component {
           <span className="f6 ml1 pr2">Add project</span>
         </Link>
         <div className="cb" />
-        <ProjectList />
+        <PipelineList />
       </div>
     );
   }
 }
 
-export default ProjectsPage;
+export default DashboardPage;

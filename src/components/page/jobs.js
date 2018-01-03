@@ -27,26 +27,17 @@ class JobsList extends Component {
     }
     return (
       <ul>
-        {jobs.map(job => (
-          <li key={job.id}>
-            {job.id}
-            ,
-            {" "}
-            {job.type}
-            ,
-            {" "}
-            {job.name}
-            ,
-            {" "}
-            {job.input}
-            ,
-            {" "}
-            {job.output}
-            ,
-            {" "}
-            {job.status}
-          </li>
-        ))}
+        {jobs &&
+          jobs.map(job => (
+            <li key={job.id}>
+              {job.id}
+              , {job.type}
+              , {job.name}
+              , {job.input}
+              , {job.output}
+              , {job.status}
+            </li>
+          ))}
       </ul>
     );
   }
@@ -61,7 +52,8 @@ function AddJobButton({ mutate, type }) {
         mutate({
           variables: { type },
           refetchQueries: [{ query: jobsListQuery }]
-        })}
+        })
+      }
     >
       Add job
     </button>
@@ -77,7 +69,8 @@ function DeleteAllJobsButton({ mutate, type }) {
         mutate({
           variables: { type },
           refetchQueries: [{ query: jobsListQuery }]
-        })}
+        })
+      }
     >
       Delete all jobs
     </button>
@@ -85,22 +78,8 @@ function DeleteAllJobsButton({ mutate, type }) {
 }
 
 const subscriptionJobUpdated = gql`
-subscription onJobUpdated($type: String!){
-  jobUpdated(type: $type){
-    id
-    type
-    name
-    input
-    output
-    status
-  }
-}`;
-
-// You can also use `graphql` for GraphQL mutations
-const AddJobButtonWithData = graphql(
-  gql`
-  mutation addJob($type: String!) {
-    addJob(type: $type) {
+  subscription onJobUpdated($type: String!) {
+    jobUpdated(type: $type) {
       id
       type
       name
@@ -109,16 +88,31 @@ const AddJobButtonWithData = graphql(
       status
     }
   }
-`
+`;
+
+// You can also use `graphql` for GraphQL mutations
+const AddJobButtonWithData = graphql(
+  gql`
+    mutation addJob($type: String!) {
+      addJob(type: $type) {
+        id
+        type
+        name
+        input
+        output
+        status
+      }
+    }
+  `
 )(AddJobButton);
 
 // You can also use `graphql` for GraphQL mutations
 const DeleteAllJobsButtonWithData = graphql(
   gql`
-  mutation deleteAllJobs($type: String!) {
-    deleteAllJobs(type: $type)
-  }
-`
+    mutation deleteAllJobs($type: String!) {
+      deleteAllJobs(type: $type)
+    }
+  `
 )(DeleteAllJobsButton);
 
 const JobsListWithData = graphql(jobsListQuery, {
