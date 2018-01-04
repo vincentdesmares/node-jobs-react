@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import Preview from "./preview";
 import { gql, graphql } from "react-apollo";
 
-class PipelineList extends Component {
+class BuildList extends Component {
   render() {
-    const { data: { loading, error, pipelines } } = this.props;
+    const { data: { loading, error, builds } } = this.props;
 
     if (loading || error) {
       return <p>Loading ...</p>;
@@ -13,10 +13,8 @@ class PipelineList extends Component {
 
     return (
       <div>
-        <h1>Pipelines</h1>
-        {pipelines.map(pipeline => (
-          <Preview key={pipeline.id} pipeline={pipeline} />
-        ))}
+        <h1>Builds</h1>
+        {builds.map(build => <Preview key={build.id} build={build} />)}
       </div>
     );
   }
@@ -24,11 +22,11 @@ class PipelineList extends Component {
 
 export default graphql(
   gql`
-    query pipelineListQuery {
-      pipelines {
+    query buildListQuery {
+      builds {
         id
         name
       }
     }
   `
-)(PipelineList);
+)(BuildList);

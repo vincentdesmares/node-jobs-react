@@ -5,13 +5,13 @@ import "./App.css";
 
 import { Route } from "react-router-dom";
 import DashboardPage from "./components/page/dashboard";
-import ProjectPage from "./components/page/project";
-import NewProjectPage from "./components/page/projectCreate";
-import ZoningsPage from "./components/page/zonings";
-import ScenesPage from "./components/page/scenes";
-import ScenePage from "./components/page/scene";
-import NewScenePage from "./components/page/sceneCreate";
-import JobsPage from "./components/page/jobs";
+import PipelinePage from "./components/page/pipeline";
+// import NewProjectPage from "./components/page/projectCreate";
+// import ZoningsPage from "./components/page/zonings";
+// import ScenesPage from "./components/page/scenes";
+// import ScenePage from "./components/page/scene";
+// import NewScenePage from "./components/page/sceneCreate";
+// import JobsPage from "./components/page/jobs";
 import Header from "./components/header";
 
 class App extends Component {
@@ -20,7 +20,12 @@ class App extends Component {
       <div className="App">
         <Header />
         <Route exact path="/" component={DashboardPage} />
-        <Route exact path="/project/new" component={NewProjectPage} />
+        <Route
+          exact
+          path="/pipeline/:pipelineId([0-9]+)"
+          component={PipelinePage}
+        />
+        {/* <Route exact path="/project/new" component={NewProjectPage} />
         <Route
           exact
           path="/project/:projectId([0-9]+)"
@@ -42,7 +47,7 @@ class App extends Component {
           path="/project/:projectId/scene/new"
           component={NewScenePage}
         />
-        <Route exact path="/jobs" component={JobsPage} />
+        <Route exact path="/jobs" component={JobsPage} /> */}
       </div>
     );
   }
