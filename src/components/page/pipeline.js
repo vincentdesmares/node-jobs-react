@@ -1,10 +1,10 @@
 //@flow
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
-// import PipelineStep from "../pipeline/step";
+import PipelineStep from "../pipeline/step";
 import { gql, graphql } from "react-apollo";
-// import NewStepButton from "../pipeline/stepCreate";
-// import AddSlot from "../pipeline/addSlot";
+import NewStepButton from "../pipeline/stepCreate";
+import AddSlot from "../pipeline/addSlot";
 // import RunGenerationButton from "../pipeline/runGenerationButton";
 
 const getQuery = gql`
@@ -12,6 +12,7 @@ const getQuery = gql`
     pipeline(id: $id) {
       id
       name
+      metadata
     }
   }
 `;
@@ -28,12 +29,12 @@ class PipelinePage extends Component {
       return <p>Loading ...</p>;
     }
 
-    //const { steps } = JSON.parse(pipeline.metadata);
+    const { steps } = pipeline.metadata ? JSON.parse(pipeline.metadata) : {};
     return (
       <div className="pa2">
         <h2 className="fl">{pipeline.name} </h2>
-        {/* <NewStepButton pipeline={pipeline} />
-        <RunGenerationButton pipeline={pipeline} />
+        <NewStepButton pipeline={pipeline} />
+        {/* <RunGenerationButton pipeline={pipeline} /> */}
         <div className="cb" />
         <AddSlot pipeline={pipeline} />
         <div className="ba b--black relative mt3">
@@ -57,7 +58,7 @@ class PipelinePage extends Component {
               return <PipelineStep key={index} step={step} batch={batch} />;
             })}
           <div className="cb" />
-        </div> */}
+        </div>
       </div>
     );
   }

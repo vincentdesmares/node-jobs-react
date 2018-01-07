@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-import NewSceneForm from "./../scene/form";
 import { graphql, gql } from "react-apollo";
-import { Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
 
 export const updateSceneQuery = gql`
-  mutation updateScene($id: Int!, $metadata: String!) {
-    updateScene(id: $id, metadata: $metadata) {
+  mutation updatePipeline($id: Int!, $metadata: String!) {
+    updatePipeline(id: $id, metadata: $metadata) {
       id
       name
-      status
       metadata
     }
   }
@@ -17,9 +13,9 @@ export const updateSceneQuery = gql`
 
 class NewStepButton extends Component {
   render() {
-    const { mutate, scene } = this.props;
-    let newScene = { ...scene };
-    let parsedMetadata = JSON.parse(newScene.metadata);
+    const { mutate, pipeline } = this.props;
+    let newPipeline = { ...pipeline };
+    let parsedMetadata = parsedMetadata ? JSON.parse(newPipeline.metadata) : {};
     return (
       <div>
         <button
@@ -31,9 +27,9 @@ class NewStepButton extends Component {
               ...parsedMetadata.steps,
               { order: parsedMetadata.steps.length + 1, status: "pending" }
             ];
-            newScene.metadata = JSON.stringify(parsedMetadata);
+            newPipeline.metadata = JSON.stringify(parsedMetadata);
             return mutate({
-              variables: { id: newScene.id, metadata: newScene.metadata }
+              variables: { id: newPipeline.id, metadata: newPipeline.metadata }
             });
           }}
         >

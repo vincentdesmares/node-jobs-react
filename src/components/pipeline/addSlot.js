@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-import NewSceneForm from "./../scene/form";
 import { graphql, gql } from "react-apollo";
-import { Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
 
-export const updateSceneQuery = gql`
-  mutation updateScene($id: Int!, $metadata: String!) {
-    updateScene(id: $id, metadata: $metadata) {
+export const updatePipelineQuery = gql`
+  mutation updatePipeline($id: Int!, $metadata: String!) {
+    updatePipeline(id: $id, metadata: $metadata) {
       id
       name
-      status
       metadata
     }
   }
@@ -21,9 +17,11 @@ class NewSlotButton extends Component {
     this.state = { stepIndex: 0 };
   }
   render() {
-    const { mutate, scene } = this.props;
-    let newScene = { ...scene };
-    let parsedMetadata = JSON.parse(newScene.metadata);
+    const { mutate, pipeline } = this.props;
+    let newPipeline = { ...pipeline };
+    let parsedMetadata = newPipeline.metadata
+      ? JSON.parse(newPipeline.metadata)
+      : {};
     return (
       <div>
         <div>
@@ -62,9 +60,12 @@ class NewSlotButton extends Component {
                 id: parsedMetadata.slotCount + 1
               });
               parsedMetadata.slotCount += 1;
-              newScene.metadata = JSON.stringify(parsedMetadata);
+              newPipeline.metadata = JSON.stringify(parsedMetadata);
               return mutate({
-                variables: { id: newScene.id, metadata: newScene.metadata }
+                variables: {
+                  id: newPipeline.id,
+                  metadata: newPipeline.metadata
+                }
               });
             }}
           >
@@ -76,4 +77,4 @@ class NewSlotButton extends Component {
   }
 }
 
-export default graphql(updateSceneQuery)(NewSlotButton);
+export default graphql(updatePipelineQuery)(NewSlotButton);
