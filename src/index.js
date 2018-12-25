@@ -25,7 +25,7 @@ const wsClient = new SubscriptionClient(`ws://localhost:5000/subscriptions`, {
 
 // Create regular NetworkInterface by using apollo-client's API:
 const networkInterface = createNetworkInterface({
-  uri: "/graphql"
+  uri: "http://localhost:8080/graphql"
 });
 
 const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
